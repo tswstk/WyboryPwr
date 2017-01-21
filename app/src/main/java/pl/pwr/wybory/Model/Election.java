@@ -23,7 +23,7 @@ public class Election implements Parcelable {
     }
 
     public Election(JSONObject jsonString){
-
+        
     }
 
     public static final Creator<Election> CREATOR = new Creator<Election>() {
