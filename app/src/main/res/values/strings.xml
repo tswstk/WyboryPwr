@@ -3,4 +3,9 @@
     <string name="login">Login</string>
     <string name="password">Hasło</string>
     <string name="log_in">Zaloguj</string>
+    <string name="fill_questionary">Wypełnij ankietę</string>
+    <string name="browse_elections">Przeglądaj wybory</string>
+    <string name="add_elections">Dodaj wybory</string>
+    <string name="add_candidate">Dodaj kandydata</string>
+    <string name="show_profile">Pokaż profil</string>
 </resources>
