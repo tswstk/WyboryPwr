@@ -3,6 +3,8 @@ package pl.pwr.wybory.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONObject;
+
 /**
  * Created by Tomek on 21.01.2017.
  */
@@ -18,6 +20,10 @@ public class Election implements Parcelable {
         name = in.readString();
         coordinator = in.readString();
         position = in.readString();
+    }
+
+    public Election(JSONObject jsonString){
+
     }
 
     public static final Creator<Election> CREATOR = new Creator<Election>() {

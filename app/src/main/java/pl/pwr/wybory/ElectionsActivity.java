@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -45,20 +48,25 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
 
     private ArrayList<Election> downloadElections(ElectionsActivity electionsActivity) {
 
+        final ArrayList<Election> elections = new ArrayList<>();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://wyborypwr.azurewebsites.net/api/")
                 .build();
 
         ApiServices service = retrofit.create(ApiServices.class);
 
-
-
         service.getAllElections().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    System.out.println(response.body().string());
+                    JSONArray array = new JSONArray(response.body().string());
+                    for (int i = 0; i < array.length(); i++) {
+                        elections.add(new Election(array.getJSONObject(i)));
+                    }
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
