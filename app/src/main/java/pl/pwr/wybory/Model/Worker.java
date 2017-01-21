@@ -1,8 +1,10 @@
-package pl.pwr.wybory;
+package pl.pwr.wybory.Model;
 
 import android.os.Parcelable;
 
 import java.util.Date;
+
+import pl.pwr.wybory.Model.Elector;
 
 /**
  * Created by Tomek on 21.01.2017.

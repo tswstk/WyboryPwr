@@ -8,6 +8,12 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import pl.pwr.wybory.Adapters.CandidatesAdapter;
+import pl.pwr.wybory.Interfaces.Const;
+import pl.pwr.wybory.Interfaces.OnCandidateInteractionListener;
+import pl.pwr.wybory.Model.Candidate;
+import pl.pwr.wybory.Model.Election;
+
 
 public class CandidatesActivity extends AppCompatActivity implements OnCandidateInteractionListener {
 

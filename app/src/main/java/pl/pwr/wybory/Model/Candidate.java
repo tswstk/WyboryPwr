@@ -1,4 +1,4 @@
-package pl.pwr.wybory;
+package pl.pwr.wybory.Model;
 
 import java.util.Date;
 

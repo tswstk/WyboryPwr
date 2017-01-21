@@ -5,9 +5,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import pl.pwr.wybory.Adapters.ElectionsAdapter;
+import pl.pwr.wybory.Interfaces.ApiServices;
+import pl.pwr.wybory.Interfaces.Const;
+import pl.pwr.wybory.Interfaces.OnElectionsInteractionListener;
+import pl.pwr.wybory.Model.Election;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ElectionsActivity extends AppCompatActivity implements OnElectionsInteractionListener {
 
@@ -31,6 +44,30 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
     }
 
     private ArrayList<Election> downloadElections(ElectionsActivity electionsActivity) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://wyborypwr.azurewebsites.net/api/")
+                .build();
+
+        ApiServices service = retrofit.create(ApiServices.class);
+
+
+
+        service.getAllElections().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    System.out.println(response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
         return new ArrayList<>();
     }
 

@@ -1,4 +1,4 @@
-package pl.pwr.wybory;
+package pl.pwr.wybory.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import pl.pwr.wybory.Interfaces.OnCandidateInteractionListener;
+import pl.pwr.wybory.Model.Candidate;
+import pl.pwr.wybory.R;
 
 /**
  * Created by Tomek on 21.01.2017.

@@ -1,4 +1,4 @@
-package pl.pwr.wybory;
+package pl.pwr.wybory.Interfaces;
 
 /**
  * Created by Tomek on 21.01.2017.

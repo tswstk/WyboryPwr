@@ -14,45 +14,46 @@
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:id="@+id/questionary_button"
+        tools:text="@string/fill_questionary"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        android:id="@+id/button"
-        tools:text="@string/fill_questionary" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginTop="54dp"
-        android:id="@+id/button2"
-        tools:text="@string/browse_elections" />
+        android:layout_marginTop="38dp"
+        android:id="@+id/show_elections_button"
+        tools:text="@string/browse_elections"
+        android:layout_below="@+id/questionary_button"
+        android:layout_alignStart="@+id/questionary_button" />
 
     <Button
         android:text="@string/add_elections"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/button2"
-        android:id="@+id/button3" />
+        android:id="@+id/add_elections_button"
+        android:layout_below="@+id/show_elections_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp" />
 
     <Button
         android:text="@string/add_candidate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button3"
-        android:layout_alignEnd="@+id/button3"
-        android:layout_marginTop="44dp"
-        android:id="@+id/button4" />
+        android:layout_marginTop="34dp"
+        android:id="@+id/add_candidate_button"
+        android:layout_below="@+id/add_elections_button"
+        android:layout_alignStart="@+id/show_elections_button" />
 
     <Button
         android:text="@string/show_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/button4"
-        android:layout_marginBottom="25dp"
-        android:id="@+id/button5" />
+        android:id="@+id/show_profile_button"
+        android:layout_below="@+id/add_candidate_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp" />
 </RelativeLayout>
