@@ -21,4 +21,5 @@ public interface ApiServices {
 
     @GET("Kandydat")
     Call<ResponseBody> getCandidates();
+
 }

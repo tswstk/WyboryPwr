@@ -120,6 +120,7 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
         Intent intent = new Intent(this, CandidateActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(Const.CANDIDATE_BUNDLE, candidate);
+        bundle.putParcelable(Const.ELECTION_BUNDLE, election);
         intent.putExtras(bundle);
         startActivity(intent);
     }

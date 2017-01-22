@@ -8,4 +8,8 @@
     <string name="add_elections">Dodaj wybory</string>
     <string name="add_candidate">Dodaj kandydata</string>
     <string name="show_profile">Pokaż profil</string>
+    <string name="candidate_label">Kandydat na stanowisko:</string>
+    <string name="employment_date_label">Zatrudniony:</string>
+    <string name="program_label">Program wyborczy</string>
+    <string name="faculty_label">Wydział</string>
 </resources>

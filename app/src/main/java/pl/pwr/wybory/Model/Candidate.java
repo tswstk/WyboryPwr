@@ -1,5 +1,7 @@
 package pl.pwr.wybory.Model;
 
+import android.os.Parcel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,7 +24,7 @@ public class Candidate extends Worker {
     }
 
     public Candidate(JSONObject jsonString) throws JSONException, ParseException {
-        super(jsonString.getString("Imie"), jsonString.getString("Nazwisko"), jsonString.getLong("Pesel"), jsonString.getString(("DataZatr")));
+        super(jsonString.getJSONObject("Pracownik"));
 
         try {
             this.program = jsonString.getString("Program");

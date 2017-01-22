@@ -37,7 +37,7 @@ public class Worker extends Elector implements Parcelable{
     }
 
     public Worker(JSONObject jsonString) throws JSONException {
-        super(jsonString.getString("Nazwisko"), jsonString.getString("Imie"), jsonString.getLong("Pesel"));
+        super(jsonString.getJSONObject("Wyborca"));
         try {
             String dateString = jsonString.getString("DatZatr");
 

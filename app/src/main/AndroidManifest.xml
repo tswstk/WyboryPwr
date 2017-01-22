@@ -22,7 +22,6 @@
         <activity android:name=".CandidatesActivity" />
         <activity android:name=".CandidateActivity" />
         <activity android:name=".MenuActivity" />
-        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
