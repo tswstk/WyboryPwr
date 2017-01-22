@@ -40,7 +40,7 @@ public class ElectionsAdapter extends android.support.v7.widget.RecyclerView.Ada
         holder.mItem = mValues.get(position);
         holder.mPositionView.setText(String.valueOf(mValues.get(position).getPosition()));
         holder.mDateView.setText(mValues.get(position).getDate());
-        holder.mFaculty.setText(mValues.get(position).getFaculty());
+        holder.mFacultyView.setText(mValues.get(position).getFaculty());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +62,7 @@ public class ElectionsAdapter extends android.support.v7.widget.RecyclerView.Ada
         public final View mView;
         public final TextView mPositionView;
         public final TextView mDateView;
+        public final TextView mFacultyView;
         public Election mItem;
 
         public ViewHolder(View view) {
@@ -70,7 +71,7 @@ public class ElectionsAdapter extends android.support.v7.widget.RecyclerView.Ada
             mView = view;
             mPositionView = (TextView) view.findViewById(R.id.position_textView);
             mDateView = (TextView) view.findViewById(R.id.date_textView);
-            mFaculty = (TextView) view.findViewById(R.id.faculty_textView);
+            mFacultyView = (TextView) view.findViewById(R.id.faculty_textView);
         }
     }
 }

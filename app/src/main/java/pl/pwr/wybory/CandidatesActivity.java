@@ -14,7 +14,9 @@ import pl.pwr.wybory.Dialogs.AddElectionsDialog;
 import pl.pwr.wybory.Interfaces.Const;
 import pl.pwr.wybory.Interfaces.OnCandidateInteractionListener;
 import pl.pwr.wybory.Model.Candidate;
-import pl.pwr.wybory.Election;
+import pl.pwr.wybory.Model.Election;
+import pl.pwr.wybory.Model.Election;
+import pl.pwr.wybory.Model.Election;
 
 
 public class CandidatesActivity extends AppCompatActivity implements OnCandidateInteractionListener {

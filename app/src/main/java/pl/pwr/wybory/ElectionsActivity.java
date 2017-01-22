@@ -89,9 +89,7 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
                         for (int i = 0; i < array.length(); i++) {
                             mValues.add(new Election(array.getJSONObject(i)));
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
+                    } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
 
@@ -107,7 +105,7 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                
+
             }
         });
     }
