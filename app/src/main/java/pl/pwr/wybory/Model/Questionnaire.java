@@ -60,9 +60,9 @@ public class Questionnaire implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(dateString);
-        dest.writeParcelable(questionnaireWorker, flags);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(dateString);
+        parcel.writeParcelable(questionnaireWorker, i);
     }
 }
 
