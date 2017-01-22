@@ -39,7 +39,7 @@ public class Worker extends Elector implements Parcelable{
     public Worker(JSONObject jsonString) throws JSONException {
         super(jsonString.getJSONObject("Wyborca"));
         try {
-            String dateString = jsonString.getString("DatZatr");
+            String dateString = jsonString.getString("DataZatr");
 
             dateString = dateString.substring(0, 10);
 
