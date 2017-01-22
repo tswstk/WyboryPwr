@@ -38,12 +38,14 @@ public class Candidate extends Worker {
     protected Candidate(Parcel in) {
         super(in);
         program = in.readString();
+        position = in.readParcelable(Position.class.getClassLoader());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(program);
+        dest.writeParcelable(position, flags);
     }
 
     public static final Creator<Candidate> CREATOR = new Creator<Candidate>() {
@@ -60,5 +62,9 @@ public class Candidate extends Worker {
 
     public String getProgram() {
         return program;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }
