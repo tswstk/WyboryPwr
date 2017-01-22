@@ -14,4 +14,8 @@ public class Candidate extends Worker {
         super(first_name, last_name, pesel, employmentDate);
         this.program = program;
     }
+
+    public String getProgram() {
+        return program;
+    }
 }

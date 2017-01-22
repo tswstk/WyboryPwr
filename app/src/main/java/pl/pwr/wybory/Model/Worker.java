@@ -2,6 +2,12 @@ package pl.pwr.wybory.Model;
 
 import android.os.Parcelable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONStringer;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import pl.pwr.wybory.Model.Elector;
@@ -12,11 +18,42 @@ import pl.pwr.wybory.Model.Elector;
 public class Worker extends Elector implements Parcelable{
 
     Date employmentDate;
+    String dateString;
 
 
     public Worker(String first_name, String last_name, long pesel, Date employmentDate) {
         super(first_name, last_name, pesel);
         this.employmentDate = employmentDate;
+    }
+
+    public String getDate() {
+        return dateString;
+    }
+
+    public Worker(JSONObject jsonString) throws JSONException {
+        super(jsonString.getString("Nazwisko"), jsonString.getString("Imie"), jsonString.getLong("Pesel"));
+        try {
+            String dateString = jsonString.getString("DatZatr");
+
+            dateString = dateString.substring(0, 10);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date d = formatter.parse(dateString);
+            /*
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(d);
+            dateString = cal.get(cal.YEAR) + "-" + cal.get(cal.MONTH)  + "-" + cal.get(cal.DAY_OF_MONTH);
+            d = formatter.parse(dateString);
+
+            */
+            this.employmentDate = d;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public Date getEmploymentDate() {
