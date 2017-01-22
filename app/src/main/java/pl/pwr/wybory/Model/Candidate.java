@@ -15,37 +15,21 @@ public class Candidate extends Worker {
 
     String program;
 
-    public Candidate(String first_name, String last_name, long pesel, Date employmentDate, String program) {
+    public Candidate(String first_name, String last_name, long pesel, String employmentDate, String program) throws ParseException {
         super(first_name, last_name, pesel, employmentDate);
         this.program = program;
     }
 
-    public Election(JSONObject jsonString){
+    public Candidate(JSONObject jsonString) throws JSONException, ParseException {
+        super(jsonString.getString("Imie"), jsonString.getString("Nazwisko"), jsonString.getLong("Pesel"), jsonString.getString(("DataZatr")));
+
         try {
-            this.program = jsonString.getString("IdKoordynatora");
-            this.positionId = jsonString.getInt("IdStanowiska");
-            this.coordinator = jsonString.getInt("IdKoordynatora");
-            JSONObject positionObject = jsonString.getJSONObject("Stanowisko");
-            this.position = new Position(positionObject.getInt("IdStanowiska"), positionObject.getString("NazwaStanowiska"), positionObject.getString("Wydzial"));
-
-
-            String dateString = jsonString.getString("DataWyborów");
-            dateString = dateString.substring(0, 10);
-
-            //ParsePosition pos = new ParsePosition(0);
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Date d = formatter.parse(dateString);
-            /*
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(d);
-            dateString = cal.get(cal.YEAR) + "-" + cal.get(cal.MONTH)  + "-" + cal.get(cal.DAY_OF_MONTH);
-            d = formatter.parse(dateString);
-
-            */
-            this.dateOfElection = d;
+            this.program = jsonString.getString("Program");
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
 
     public String getProgram() {
         return program;

@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
@@ -92,6 +93,8 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
                             mValues.add(new Candidate(array.getJSONObject(i)));
                         }
                     } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
 
