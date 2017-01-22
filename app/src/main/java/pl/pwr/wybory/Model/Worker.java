@@ -1,5 +1,6 @@
 package pl.pwr.wybory.Model;
 
+import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.json.JSONException;
@@ -64,4 +65,29 @@ public class Worker extends Elector implements Parcelable{
     public Date getEmploymentDate() {
         return employmentDate;
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeSerializable(employmentDate);
+        dest.writeString(dateString);
+    }
+
+    protected Worker(Parcel in) {
+        super(in);
+        employmentDate = (Date) in.readSerializable();
+        dateString = in.readString();
+    }
+
+    public static final Creator<Elector> CREATOR = new Creator<Elector>() {
+        @Override
+        public Elector createFromParcel(Parcel in) {
+            return new Worker(in);
+        }
+
+        @Override
+        public Elector[] newArray(int size) {
+            return new Worker[size];
+        }
+    };
 }
