@@ -39,6 +39,7 @@ public class Questionnaire implements Parcelable {
 
     protected Questionnaire(Parcel in) {
         dateString = in.readString();
+        questionnaireWorker = in.readParcelable(QuestionnaireWorker.class.getClassLoader());
     }
 
     public static final Creator<Questionnaire> CREATOR = new Creator<Questionnaire>() {
@@ -59,8 +60,9 @@ public class Questionnaire implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(dateString);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(dateString);
+        dest.writeParcelable(questionnaireWorker, flags);
     }
 }
 

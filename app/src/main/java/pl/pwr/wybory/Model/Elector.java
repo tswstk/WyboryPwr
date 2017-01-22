@@ -20,12 +20,6 @@ public class Elector implements Parcelable {
     String last_name;
     long pesel;
 
-    protected Elector(Parcel in) {
-        elector_id = in.readInt();
-        first_name = in.readString();
-        last_name = in.readString();
-        pesel = in.readLong();
-    }
 
     public int getElector_id() {
         return elector_id;
@@ -80,8 +74,17 @@ public class Elector implements Parcelable {
         return 0;
     }
 
+
+    protected Elector(Parcel in) {
+        elector_id = in.readInt();
+        first_name = in.readString();
+        last_name = in.readString();
+        pesel = in.readLong();
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(elector_id);
         dest.writeString(first_name);
         dest.writeString(last_name);
         dest.writeLong(pesel);

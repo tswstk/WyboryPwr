@@ -82,7 +82,7 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
 
         ApiServices service = retrofit.create(ApiServices.class);
 
-        service.getCandidates().enqueue(new Callback<ResponseBody>() {
+        service.getCandidates(election.getElctionId()).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -123,5 +123,26 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
         bundle.putParcelable(Const.ELECTION_BUNDLE, election);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @Override
+    public void onCandidateDeleteListener(int candidateId) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Const.BASE_URL)
+                .build();
+
+        ApiServices services = retrofit.create(ApiServices.class);
+        services.deleteCandidate(candidateId).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 }

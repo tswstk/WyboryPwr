@@ -16,7 +16,7 @@ import pl.pwr.wybory.Model.Elector;
 /**
  * Created by Tomek on 21.01.2017.
  */
-public class Worker extends Elector implements Parcelable{
+public class Worker extends Elector{
 
     Date employmentDate;
     String dateString;
@@ -24,7 +24,7 @@ public class Worker extends Elector implements Parcelable{
 
     public Worker(String first_name, String last_name, long pesel, String employmentDate) throws ParseException {
         super(first_name, last_name, pesel);
-        String dateString = employmentDate.substring(0, 10);
+        dateString = employmentDate.substring(0, 10);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date d = formatter.parse(dateString);
@@ -39,9 +39,9 @@ public class Worker extends Elector implements Parcelable{
     public Worker(JSONObject jsonString) throws JSONException {
         super(jsonString.getJSONObject("Wyborca"));
         try {
-            String dateString = jsonString.getString("DatZatr");
+            String dateString = jsonString.getString("DataZatr");
 
-            dateString = dateString.substring(0, 10);
+            this.dateString = dateString.substring(0, 10);
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date d = formatter.parse(dateString);

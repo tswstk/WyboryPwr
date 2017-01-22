@@ -4,6 +4,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -19,7 +20,9 @@ public interface ApiServices {
     @GET("Wybory")
     Call<ResponseBody> getAllElections();
 
-    @GET("Kandydat")
-    Call<ResponseBody> getCandidates();
+    @GET("ElectionKandidate/{id}")
+    Call<ResponseBody> getCandidates(@Path("id") int id);
 
+    @DELETE("api/Kandydat/{id}")
+    Call<ResponseBody> deleteCandidate(@Path("id") int id);
 }

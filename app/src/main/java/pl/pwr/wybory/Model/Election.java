@@ -9,12 +9,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.SimpleTimeZone;
-import java.util.StringTokenizer;
-
-import pl.pwr.wybory.Model.Position;
 
 /**
  * Created by Tomek on 21.01.2017.
@@ -59,6 +54,7 @@ public class Election implements Parcelable {
     //{"$id":"1","IdWyborów":1,"IdStanowiska":1,"IdKoordynatora":1,"DataWyborów":"2017-02-01T00:00:00","Głos":[],"Koordynator":null,"Stanowisko":null}
     public Election(JSONObject jsonString){
         try {
+            this.elctionId = jsonString.getInt("IdWyborów");
             this.coordinator = jsonString.getInt("IdKoordynatora");
             this.positionId = jsonString.getInt("IdStanowiska");
             this.coordinator = jsonString.getInt("IdKoordynatora");
@@ -67,7 +63,7 @@ public class Election implements Parcelable {
 
 
             String dateString = jsonString.getString("DataWyborów");
-            dateString = dateString.substring(0, 10);
+            this.dateString = dateString.substring(0, 10);
 
             //ParsePosition pos = new ParsePosition(0);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -122,8 +118,8 @@ public class Election implements Parcelable {
         dest.writeInt(elctionId);
         dest.writeInt(coordinator);
         dest.writeInt(positionId);
+        dest.writeParcelable(position, flags);
         dest.writeString(dateString);
         dest.writeSerializable(dateOfElection);
-        dest.writeParcelable(position, flags);
     }
 }

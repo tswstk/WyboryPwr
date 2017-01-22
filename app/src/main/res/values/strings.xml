@@ -12,4 +12,7 @@
     <string name="employment_date_label">Zatrudniony:</string>
     <string name="program_label">Program wyborczy</string>
     <string name="faculty_label">Wydział</string>
+    <string name="edit">Edytuj</string>
+    <string name="vote">Głosuj</string>
+    <string name="delete">Usuń</string>
 </resources>

@@ -9,4 +9,5 @@ import pl.pwr.wybory.Model.Candidate;
 public interface OnCandidateInteractionListener {
 
     void onCandidateInteractionListener(Candidate candidate);
+    void onCandidateDeleteListener(int candidateId);
 }

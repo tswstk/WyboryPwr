@@ -30,7 +30,7 @@ public class CandidatesAdapter extends android.support.v7.widget.RecyclerView.Ad
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_election, parent, false);
+                .inflate(R.layout.item_candidate, parent, false);
         return new ViewHolder(view);
     }
 
