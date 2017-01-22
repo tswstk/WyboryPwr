@@ -37,7 +37,7 @@ public class Election implements Parcelable {
 
         position = in.readParcelable(Position.class.getClassLoader());
 
-        String dateString = in.readString();
+        dateString = in.readString();
         ParsePosition pos = new ParsePosition(0);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 
@@ -122,5 +122,8 @@ public class Election implements Parcelable {
         dest.writeInt(elctionId);
         dest.writeInt(coordinator);
         dest.writeInt(positionId);
+        dest.writeString(dateString);
+        dest.writeSerializable(dateOfElection);
+        dest.writeParcelable(position, flags);
     }
 }

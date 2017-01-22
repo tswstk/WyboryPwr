@@ -115,6 +115,7 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
         Intent intent = new Intent(this, CandidatesActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(Const.ELECTION_BUNDLE, election);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 }
