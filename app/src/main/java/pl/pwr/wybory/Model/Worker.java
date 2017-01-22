@@ -29,6 +29,7 @@ public class Worker extends Elector implements Parcelable{
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date d = formatter.parse(dateString);
         this.employmentDate = d;
+
     }
 
     public String getDate() {
