@@ -20,17 +20,9 @@ public class MenuActivity extends AppCompatActivity {
 
     private void setUpOnClicks() {
 
-        findViewById(R.id.add_elections_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, CandidateActivity.class);
-                startActivity(intent);
-            }
-        });
         findViewById(R.id.questionary_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
         findViewById(R.id.show_elections_button).setOnClickListener(new View.OnClickListener() {
@@ -41,13 +33,6 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
         findViewById(R.id.show_profile_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, CandidateActivity.class);
-                startActivity(intent);
-            }
-        });
-        findViewById(R.id.add_elections_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this, CandidateActivity.class);

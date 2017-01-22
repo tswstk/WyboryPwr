@@ -14,10 +14,19 @@
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:id="@+id/questionary_button"
-        tools:text="@string/fill_questionary"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="70dp"
+        android:id="@+id/show_elections_button"
+        tools:text="@string/browse_elections"
+        android:layout_below="@+id/questionary_button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/show_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/show_profile_button"
+        android:layout_marginTop="109dp"
+        android:layout_below="@+id/show_elections_button"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -25,35 +34,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="38dp"
-        android:id="@+id/show_elections_button"
-        tools:text="@string/browse_elections"
-        android:layout_below="@+id/questionary_button"
-        android:layout_alignStart="@+id/questionary_button" />
+        android:id="@+id/questionary_button"
+        tools:text="@string/fill_questionary"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:text="@string/add_elections"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/add_elections_button"
-        android:layout_below="@+id/show_elections_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp" />
-
-    <Button
-        android:text="@string/add_candidate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:id="@+id/add_candidate_button"
-        android:layout_below="@+id/add_elections_button"
-        android:layout_alignStart="@+id/show_elections_button" />
-
-    <Button
-        android:text="@string/show_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/show_profile_button"
-        android:layout_below="@+id/add_candidate_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp" />
 </RelativeLayout>

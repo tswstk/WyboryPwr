@@ -11,34 +11,34 @@
     tools:context="pl.pwr.wybory.LoginActivity">
 
     <EditText
+        android:id="@+id/login_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="@string/login"
-        android:ems="10"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="50dp"
         android:layout_marginTop="78dp"
-        android:id="@+id/login_editText" />
+        android:ems="10"
+        android:hint="@string/login"
+        android:inputType="textPersonName" />
 
     <EditText
+        android:id="@+id/password_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:layout_below="@+id/login_editText"
         android:layout_alignEnd="@+id/login_editText"
+        android:layout_below="@+id/login_editText"
         android:layout_marginTop="32dp"
-        android:id="@+id/password_editText"
-        android:text="@string/password" />
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/password"/>
 
     <Button
-        android:text="@string/log_in"
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignEnd="@+id/password_editText"
+        android:layout_centerVertical="true"
         android:layout_marginEnd="59dp"
-        android:id="@+id/login_button" />
+        android:text="@string/log_in" />
 </RelativeLayout>
