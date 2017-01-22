@@ -25,4 +25,7 @@ public interface ApiServices {
 
     @DELETE("api/Kandydat/{id}")
     Call<ResponseBody> deleteCandidate(@Path("id") int id);
+
+    @GET("Ankieta")
+    Call<ResponseBody> getAllQuestionnaires();
 }

@@ -1,6 +1,5 @@
 package pl.pwr.wybory.Adapters;
 
-
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +9,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.pwr.wybory.Interfaces.OnElectionsInteractionListener;
-import pl.pwr.wybory.Model.Election;
 import pl.pwr.wybory.Model.Questionnaire;
+import pl.pwr.wybory.QuestionnaireActivity;
 import pl.pwr.wybory.R;
 
 /**
@@ -23,26 +21,26 @@ public class QuestionnaireAdapter extends android.support.v7.widget.RecyclerView
 
     private final ArrayList<Questionnaire> mValues;
 
-    public QuestionnaireAdapter(ArrayList<Questionnaire> mValues) {
+    public QuestionnaireAdapter(ArrayList<Questionnaire> mValues, QuestionnaireActivity questionnaireActivity) {
         this.mValues = mValues;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_election, parent, false);
+                .inflate(R.layout.item_questionnaire, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mQuestionnaireView.setText("Ankieta od " + mValues.get(position).getId() + " koniec:" + mValues.get(position).getDate());
+        holder.mQuestionnaireView.setText("Koniec ankiety: " + mValues.get(position).getDate());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mValues.size();
     }
 
     @Override

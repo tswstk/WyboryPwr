@@ -22,6 +22,8 @@
         <activity android:name=".CandidatesActivity" />
         <activity android:name=".CandidateActivity" />
         <activity android:name=".MenuActivity" />
+        <activity android:name=".QuestionnaireActivity" />
+        <activity android:name=".QuestionActivity"></activity>
     </application>
 
 </manifest>

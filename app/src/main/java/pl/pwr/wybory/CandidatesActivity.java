@@ -80,7 +80,7 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
 
         ApiServices service = retrofit.create(ApiServices.class);
 
-        service.getCandidates(election.getElctionId()).enqueue(new Callback<ResponseBody>() {
+        service.getCandidates(election.getElectionId()).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
