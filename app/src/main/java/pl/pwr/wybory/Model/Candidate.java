@@ -1,20 +1,17 @@
 package pl.pwr.wybory.Model;
 
-import android.os.Parcelable;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.jar.Pack200;
 
 /**
  * Created by Tomek on 21.01.2017.
  */
 
-public class Candidate extends Worker implements Parcelable{
+public class Candidate extends Worker {
 
     String program;
     Worker worker;
@@ -25,7 +22,8 @@ public class Candidate extends Worker implements Parcelable{
     }
 
     public Candidate(JSONObject jsonString) throws JSONException, ParseException {
-        super(jsonString.getJSONObject("Pracownik"));
+        super(jsonString.getString("Imie"), jsonString.getString("Nazwisko"), jsonString.getLong("Pesel"), jsonString.getString(("DataZatr")));
+
         try {
             this.program = jsonString.getString("Program");
         } catch (JSONException e) {
@@ -33,6 +31,28 @@ public class Candidate extends Worker implements Parcelable{
         }
     }
 
+    protected Candidate(Parcel in) {
+        super(in);
+        program = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(program);
+    }
+
+    public static final Creator<Candidate> CREATOR = new Creator<Candidate>() {
+        @Override
+        public Candidate createFromParcel(Parcel in) {
+            return new Candidate(in);
+        }
+
+        @Override
+        public Candidate[] newArray(int size) {
+            return new Candidate[size];
+        }
+    };
 
     public String getProgram() {
         return program;
