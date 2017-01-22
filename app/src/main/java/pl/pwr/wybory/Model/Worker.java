@@ -79,14 +79,14 @@ public class Worker extends Elector implements Parcelable{
         dateString = in.readString();
     }
 
-    public static final Creator<Elector> CREATOR = new Creator<Elector>() {
+    public static final Creator<Worker> CREATOR = new Creator<Worker>() {
         @Override
-        public Elector createFromParcel(Parcel in) {
+        public Worker createFromParcel(Parcel in) {
             return new Worker(in);
         }
 
         @Override
-        public Elector[] newArray(int size) {
+        public Worker[] newArray(int size) {
             return new Worker[size];
         }
     };
