@@ -1,5 +1,6 @@
 package pl.pwr.wybory;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,7 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
     ElectionsAdapter mAdapter;
 
     ArrayList<Election> mValues;
+    ProgressDialog prograssDialog;
 
 
     @Override
@@ -44,7 +46,8 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elections);
 
-        mValues = downloadElections(this);
+        mValues = new ArrayList<>();
+        downloadElections();
 
         mAdapter = new ElectionsAdapter(mValues, this);
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
@@ -65,38 +68,38 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
         });
     }
 
-    private ArrayList<Election> downloadElections(ElectionsActivity electionsActivity) {
+    private void downloadElections() {
 
-        final ArrayList<Election> elections = new ArrayList<>();
+        prograssDialog = ProgressDialog.show(ElectionsActivity.this, "",
+                "Loading. Please wait...", false);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://wyborypwr.azurewebsites.net/api/")
+                .baseUrl(Const.BASE_URL)
                 .build();
 
         ApiServices service = retrofit.create(ApiServices.class);
 
-       // RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), "{\"IdPracownika\":1}");
-
-
         service.getAllElections().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                try {
-//                    JSONArray array = new JSONArray(response.body().string());
-//                    for (int i = 0; i < array.length(); i++) {
-//                        elections.add(new Election(array.getJSONObject(i)));
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
+
                 if (response!=null && response.body() != null){
                     try {
-                        System.out.println(response.body().string());
+                        JSONArray array = new JSONArray(response.body().string());
+                        for (int i = 0; i < array.length(); i++) {
+                            mValues.add(new Election(array.getJSONObject(i)));
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+
+                    if (prograssDialog != null){
+                        prograssDialog.dismiss();
+                    }
+                    mAdapter.notifyDataSetChanged();
+
                 }else{
                     System.out.println("null");
                 }
@@ -104,10 +107,9 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                
             }
         });
-        return new ArrayList<>();
     }
 
     @Override

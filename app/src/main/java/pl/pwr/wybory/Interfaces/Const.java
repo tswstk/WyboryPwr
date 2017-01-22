@@ -8,4 +8,6 @@ public interface Const {
 
     String ELECTION_BUNDLE = "election";
     String CANDIDATE_BUNDLE = "candidate";
+
+    String BASE_URL = "http://wyborypwr.azurewebsites.net/api/";
 }

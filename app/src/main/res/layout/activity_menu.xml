@@ -21,15 +21,6 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="@string/show_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/show_profile_button"
-        android:layout_marginTop="109dp"
-        android:layout_below="@+id/show_elections_button"
-        android:layout_centerHorizontal="true" />
-
-    <Button
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,6 +28,15 @@
         android:id="@+id/questionary_button"
         tools:text="@string/fill_questionary"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/show_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/show_profile_button"
+        android:layout_marginTop="110dp"
+        android:layout_below="@+id/show_elections_button"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -38,8 +38,9 @@ public class ElectionsAdapter extends android.support.v7.widget.RecyclerView.Ada
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.mItem = mValues.get(position);
-        holder.mNameView.setText(String.valueOf(mValues.get(position).getName()));
-        holder.mCoordinatorView.setText(mValues.get(position).getCoordinator());
+        holder.mPositionView.setText(String.valueOf(mValues.get(position).getPosition()));
+        holder.mDateView.setText(mValues.get(position).getDate());
+        holder.mFaculty.setText(mValues.get(position).getFaculty());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,16 +60,17 @@ public class ElectionsAdapter extends android.support.v7.widget.RecyclerView.Ada
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public final View mView;
-        public final TextView mNameView;
-        public final TextView mCoordinatorView;
+        public final TextView mPositionView;
+        public final TextView mDateView;
         public Election mItem;
 
         public ViewHolder(View view) {
             super(view);
 
             mView = view;
-            mNameView = (TextView) view.findViewById(R.id.name);
-            mCoordinatorView = (TextView) view.findViewById(R.id.coordinator);
+            mPositionView = (TextView) view.findViewById(R.id.position_textView);
+            mDateView = (TextView) view.findViewById(R.id.date_textView);
+            mFaculty = (TextView) view.findViewById(R.id.faculty_textView);
         }
     }
 }
