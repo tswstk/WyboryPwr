@@ -19,7 +19,7 @@
         android:clickable="true"
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_add"
-        android:id="@+id/add_election_fab"
+        android:id="@+id/add_candidate_fab"
         android:layout_margin="16dp" />
 
     <android.support.v7.widget.RecyclerView
