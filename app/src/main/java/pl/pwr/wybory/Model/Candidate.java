@@ -16,7 +16,7 @@ import java.util.Date;
 public class Candidate extends Worker {
 
     String program;
-    Worker worker;
+    Position position;
 
     public Candidate(String first_name, String last_name, long pesel, String employmentDate, String program) throws ParseException {
         super(first_name, last_name, pesel, employmentDate);
@@ -27,6 +27,8 @@ public class Candidate extends Worker {
         super(jsonString.getJSONObject("Pracownik"));
 
         try {
+            JSONObject positionObject = jsonString.getJSONObject("Stanowisko");
+            this.position = new Position(positionObject.getInt("IdStanowiska"), positionObject.getString("NazwaStanowiska"), positionObject.getString("Wydzial"));
             this.program = jsonString.getString("Program");
         } catch (JSONException e) {
             e.printStackTrace();
