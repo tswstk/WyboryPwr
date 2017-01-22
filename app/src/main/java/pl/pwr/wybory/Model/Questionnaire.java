@@ -64,5 +64,14 @@ public class Questionnaire implements Parcelable {
         parcel.writeString(dateString);
         parcel.writeParcelable(questionnaireWorker, i);
     }
+
+    public String getDate() {
+        return dateString;
+    }
+
+    public int getId()
+    {
+        return questionnaireWorker.elector_id;
+    }
 }
 

@@ -17,6 +17,7 @@ public class Candidate extends Worker {
 
     String program;
     Position position;
+    int candidate_id;
 
     public Candidate(String first_name, String last_name, long pesel, String employmentDate, String program) throws ParseException {
         super(first_name, last_name, pesel, employmentDate);
@@ -28,6 +29,7 @@ public class Candidate extends Worker {
 
         try {
             JSONObject positionObject = jsonString.getJSONObject("Stanowisko");
+            this.candidate_id = jsonString.getInt("IdKandydata");
             this.position = new Position(positionObject.getInt("IdStanowiska"), positionObject.getString("NazwaStanowiska"), positionObject.getString("Wydzial"));
             this.program = jsonString.getString("Program");
         } catch (JSONException e) {

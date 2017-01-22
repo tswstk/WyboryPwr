@@ -23,8 +23,6 @@ import pl.pwr.wybory.Interfaces.Const;
 import pl.pwr.wybory.Interfaces.OnCandidateInteractionListener;
 import pl.pwr.wybory.Model.Candidate;
 import pl.pwr.wybory.Model.Election;
-import pl.pwr.wybory.Model.Election;
-import pl.pwr.wybory.Model.Election;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,7 +49,7 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
         this.election = getIntent().getExtras().getParcelable(Const.ELECTION_BUNDLE);
 
         mValues = new ArrayList<>();
-        downloadCandidates(election.getElctionId());
+        downloadCandidates(election.getElectionId());
 
         mAdapter = new CandidatesAdapter(mValues, this);
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
