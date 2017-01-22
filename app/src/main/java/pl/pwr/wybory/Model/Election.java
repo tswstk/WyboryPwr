@@ -1,4 +1,4 @@
-package pl.pwr.wybory.Model;
+package pl.pwr.wybory;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,25 +6,86 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.SimpleTimeZone;
+import java.util.StringTokenizer;
+
+import pl.pwr.wybory.Model.Position;
+
 /**
  * Created by Tomek on 21.01.2017.
  */
 
 public class Election implements Parcelable {
 
-    String name;
-    String coordinator;
-    String position;
+    int elctionId;
+    int coordinator;
+    int positionId;
+    Position position;
+    Date dateOfElection;
+    String dateString;
 
 
     protected Election(Parcel in) {
-        name = in.readString();
-        coordinator = in.readString();
-        position = in.readString();
+        elctionId = in.readInt();
+        coordinator = in.readInt();
+        positionId = in.readInt();
+
+        position = in.readParcelable(Position.class.getClassLoader());
+
+        String dateString = in.readString();
+        ParsePosition pos = new ParsePosition(0);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+
+        dateOfElection = formatter.parse(dateString, pos);
     }
 
+    public String getPosition() {
+        return position.getNameOfPosition();
+    }
+
+    public String getDate() {
+        return dateString;
+    }
+
+    public String getFaculty() {
+        return position.getFaculty();
+    }
+
+    //{"$id":"1","IdWyborów":1,"IdStanowiska":1,"IdKoordynatora":1,"DataWyborów":"2017-02-01T00:00:00","Głos":[],"Koordynator":null,"Stanowisko":null}
     public Election(JSONObject jsonString){
-        
+        try {
+            this.coordinator = jsonString.getInt("IdKoordynatora");
+            this.positionId = jsonString.getInt("IdStanowiska");
+            this.coordinator = jsonString.getInt("IdKoordynatora");
+            JSONObject positionObject = jsonString.getJSONObject("Stanowisko");
+            this.position = new Position(positionObject.getInt("IdStanowiska"), positionObject.getString("NazwaStanowiska"), positionObject.getString("Wydzial"));
+
+
+            String dateString = jsonString.getString("DataWyborów");
+            dateString = dateString.substring(0, 10);
+
+            //ParsePosition pos = new ParsePosition(0);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date d = formatter.parse(dateString);
+            /*
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(d);
+            dateString = cal.get(cal.YEAR) + "-" + cal.get(cal.MONTH)  + "-" + cal.get(cal.DAY_OF_MONTH);
+            d = formatter.parse(dateString);
+
+            */
+            this.dateOfElection = d;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static final Creator<Election> CREATOR = new Creator<Election>() {
@@ -39,15 +100,15 @@ public class Election implements Parcelable {
         }
     };
 
-    public String getPosition() {
-        return position;
+    public int getPositionId() {
+        return positionId;
     }
 
-    public String getName() {
-        return name;
+    public int getElctionId() {
+        return elctionId;
     }
 
-    public String getCoordinator() {
+    public int getCoordinator() {
         return coordinator;
     }
 
@@ -58,8 +119,8 @@ public class Election implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(coordinator);
-        dest.writeString(position);
+        dest.writeInt(elctionId);
+        dest.writeInt(coordinator);
+        dest.writeInt(positionId);
     }
 }
