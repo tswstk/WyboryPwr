@@ -18,6 +18,7 @@ public class Questionnaire implements Parcelable {
 
     Date finishDate;
     String dateString;
+    int questionnaireId;
     QuestionnaireWorker questionnaireWorker;
 
 
@@ -67,6 +68,10 @@ public class Questionnaire implements Parcelable {
 
     public String getDate() {
         return dateString;
+    }
+
+    public int getQuestionnaireId() {
+        return questionnaireId;
     }
 
     public int getId()

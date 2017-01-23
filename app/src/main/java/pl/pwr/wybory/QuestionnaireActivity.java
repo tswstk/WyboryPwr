@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import pl.pwr.wybory.Adapters.QuestionnaireAdapter;
-import pl.pwr.wybory.Dialogs.AddElectionsDialog;
+import pl.pwr.wybory.Dialogs.AddQuestionnaireDialog;
 import pl.pwr.wybory.Interfaces.ApiServices;
 import pl.pwr.wybory.Interfaces.Const;
 import pl.pwr.wybory.Interfaces.OnQuestionnaireInteracionListener;
@@ -39,7 +39,7 @@ public class QuestionnaireActivity extends AppCompatActivity implements OnQuesti
     ProgressDialog prograssDialog;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaires);
 
@@ -59,7 +59,7 @@ public class QuestionnaireActivity extends AppCompatActivity implements OnQuesti
             @Override
             public void onClick(View v) {
 
-                AddElectionsDialog dialog = new AddElectionsDialog();
+                AddQuestionnaireDialog dialog = new AddQuestionnaireDialog();
                 dialog.show(getSupportFragmentManager(), "add_questioonnaire_fab");
             }
         });
@@ -109,7 +109,7 @@ public class QuestionnaireActivity extends AppCompatActivity implements OnQuesti
 
     @Override
     public void onQuestionnaireInteracionListener(Questionnaire questionnaire) {
-        Intent intent = new Intent(this, CandidatesActivity.class);
+        Intent intent = new Intent(this, QuestionActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(Const.QUESTIONNAIRE_BUNDLE, questionnaire);
         intent.putExtras(bundle);
