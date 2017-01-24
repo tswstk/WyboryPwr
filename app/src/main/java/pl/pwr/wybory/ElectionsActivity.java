@@ -2,6 +2,7 @@ package pl.pwr.wybory;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import okio.Buffer;
 import okio.BufferedSink;
 import pl.pwr.wybory.Adapters.ElectionsAdapter;
 import pl.pwr.wybory.Dialogs.AddElectionsDialog;
+import pl.pwr.wybory.Interfaces.Access;
 import pl.pwr.wybory.Interfaces.ApiServices;
 import pl.pwr.wybory.Interfaces.Const;
 import pl.pwr.wybory.Interfaces.OnElectionsInteractionListener;
@@ -39,6 +41,7 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
 
     ArrayList<Election> mValues;
     ProgressDialog prograssDialog;
+    FloatingActionButton fab;
 
 
     @Override
@@ -54,16 +57,21 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
 
+        fab = (FloatingActionButton) findViewById(R.id.add_election_fab);
         setOnFabAction();
+        if(!Access.isCoordinator()) fab.setVisibility(View.GONE);
     }
 
     private void setOnFabAction() {
-        findViewById(R.id.add_election_fab).setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                AddElectionsDialog dialog = new AddElectionsDialog();
-                dialog.show(getSupportFragmentManager(), "add_elections_dialog");
+//                AddElectionsDialog dialog = new AddElectionsDialog();
+//                dialog.show(getSupportFragmentManager(), "add_elections_dialog");
+
+                Intent intent = new Intent(ElectionsActivity.this, QuestionnaireActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -83,7 +91,7 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                if (response!=null && response.body() != null){
+                if (response != null && response.body() != null) {
                     try {
                         JSONArray array = new JSONArray(response.body().string());
                         for (int i = 0; i < array.length(); i++) {
@@ -93,12 +101,12 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
                         e.printStackTrace();
                     }
 
-                    if (prograssDialog != null){
+                    if (prograssDialog != null) {
                         prograssDialog.dismiss();
                     }
                     mAdapter.notifyDataSetChanged();
 
-                }else{
+                } else {
                     System.out.println("null");
                 }
             }

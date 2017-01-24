@@ -18,7 +18,6 @@ import java.util.Date;
 public class Election implements Parcelable {
 
     int electionId;
-    int coordinatorId;
     int positionId;
     Position position;
     Date dateOfElection;
@@ -27,7 +26,6 @@ public class Election implements Parcelable {
 
     protected Election(Parcel in) {
         electionId = in.readInt();
-        coordinatorId = in.readInt();
         positionId = in.readInt();
 
         position = in.readParcelable(Position.class.getClassLoader());
@@ -54,15 +52,12 @@ public class Election implements Parcelable {
     //{"$id":"1","IdWyborów":1,"IdStanowiska":1,"IdKoordynatora":1,"DataWyborów":"2017-02-01T00:00:00","Głos":[],"Koordynator":null,"Stanowisko":null}
     public Election(JSONObject jsonString){
         try {
-            this.coordinatorId = jsonString.getInt("IdKoordynatora");
-            this.electionId = jsonString.getInt("IdWyborów");
-            this.positionId = jsonString.getInt("IdStanowiska");
-            this.coordinatorId = jsonString.getInt("IdKoordynatora");
-            JSONObject positionObject = jsonString.getJSONObject("Stanowisko");
-            this.position = new Position(positionObject.getInt("IdStanowiska"), positionObject.getString("NazwaStanowiska"), positionObject.getString("Wydzial"));
+            this.electionId = jsonString.getInt("idWyborow");
+            this.positionId = jsonString.getInt("idStanowiska");
+            this.position = new Position(jsonString.getInt("idStanowiska"), jsonString.getString("nazwaStanowiska"), jsonString.getString("wydzial"));
 
 
-            String dateString = jsonString.getString("DataWyborów");
+            String dateString = jsonString.getString("dataWyborow");
             dateString = dateString.substring(0, 10);
 
             //ParsePosition pos = new ParsePosition(0);
@@ -104,9 +99,6 @@ public class Election implements Parcelable {
         return electionId;
     }
 
-    public int getCoordinatorId() {
-        return coordinatorId;
-    }
 
     @Override
     public int describeContents() {
@@ -116,7 +108,6 @@ public class Election implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(electionId);
-        dest.writeInt(coordinatorId);
         dest.writeInt(positionId);
         dest.writeString(dateString);
         dest.writeSerializable(dateOfElection);

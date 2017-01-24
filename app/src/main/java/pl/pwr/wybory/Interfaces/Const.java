@@ -12,4 +12,5 @@ public interface Const {
     String QUESTION_BUNDLE = "questions";
 
     String BASE_URL = "http://wyborypwr.azurewebsites.net/api/";
+    String CANDIDATE_ID_BUNDLE = "candidate_id";
 }

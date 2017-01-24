@@ -69,4 +69,9 @@ public class Candidate extends Worker {
     public Position getPosition() {
         return position;
     }
+
+    @Override
+    public int describeContents() {
+        return super.describeContents();
+    }
 }

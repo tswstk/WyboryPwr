@@ -5,8 +5,12 @@ import android.hardware.camera2.CameraManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
+import pl.pwr.wybory.Interfaces.Access;
+import pl.pwr.wybory.Interfaces.Const;
 import pl.pwr.wybory.Model.Candidate;
+import pl.pwr.wybory.Model.Questionnaire;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -20,24 +24,37 @@ public class MenuActivity extends AppCompatActivity {
 
     private void setUpOnClicks() {
 
-        findViewById(R.id.questionary_button).setOnClickListener(new View.OnClickListener() {
+        Button questionaryButton = (Button) findViewById(R.id.questionary_button);
+        Button electionsButton = (Button) findViewById(R.id.show_elections_button);
+        Button profileButton = (Button) findViewById(R.id.show_profile_button);
+
+        questionaryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            }
-        });
-        findViewById(R.id.show_elections_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, CandidateActivity.class);
+                Intent intent = new Intent(MenuActivity.this, QuestionnaireActivity.class);
                 startActivity(intent);
             }
         });
-        findViewById(R.id.show_profile_button).setOnClickListener(new View.OnClickListener() {
+        electionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, CandidateActivity.class);
+                Intent intent = new Intent(MenuActivity.this, ElectionsActivity.class);
                 startActivity(intent);
             }
         });
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, CandidateActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt(Const.CANDIDATE_ID_BUNDLE, Access.user.getElector_id());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        if (!Access.isCandidate()){
+            profileButton.setVisibility(View.GONE);
+        }
     }
 }

@@ -91,4 +91,9 @@ public class Worker extends Elector{
             return new Worker[size];
         }
     };
+
+    @Override
+    public int describeContents() {
+        return super.describeContents();
+    }
 }

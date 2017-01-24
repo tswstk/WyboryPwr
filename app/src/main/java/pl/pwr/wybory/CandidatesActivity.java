@@ -2,6 +2,7 @@ package pl.pwr.wybory;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import okhttp3.ResponseBody;
 import pl.pwr.wybory.Adapters.CandidatesAdapter;
 import pl.pwr.wybory.Dialogs.AddElectionsDialog;
+import pl.pwr.wybory.Interfaces.Access;
 import pl.pwr.wybory.Interfaces.ApiServices;
 import pl.pwr.wybory.Interfaces.Const;
 import pl.pwr.wybory.Interfaces.OnCandidateInteractionListener;
@@ -39,7 +41,7 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
     Election election;
 
     ProgressDialog prograssDialog;
-
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +58,14 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
 
+
+        fab = (FloatingActionButton) findViewById(R.id.add_candidate_fab);
         setOnFabAction();
+        if(!Access.isCoordinator()) fab.setVisibility(View.GONE);
     }
 
     private void setOnFabAction() {
-        findViewById(R.id.add_candidate_fab).setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AddElectionsDialog dialog = new AddElectionsDialog();
@@ -117,8 +122,8 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
     public void onCandidateInteractionListener(Candidate candidate) {
         Intent intent = new Intent(this, CandidateActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelable(Const.CANDIDATE_BUNDLE, candidate);
-        bundle.putParcelable(Const.ELECTION_BUNDLE, election);
+        bundle.putInt(Const.CANDIDATE_ID_BUNDLE, candidate.getElector_id());
+     //   bundle.putParcelable(Const.ELECTION_BUNDLE, election);
         intent.putExtras(bundle);
         startActivity(intent);
     }
