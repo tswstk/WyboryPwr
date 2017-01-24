@@ -14,6 +14,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import okhttp3.ResponseBody;
 import pl.pwr.wybory.Adapters.QuestionAdapter;
@@ -29,10 +30,10 @@ import retrofit2.Retrofit;
 
 public class QuestionActivity extends AppCompatActivity {
 
-    RecyclerView mRecyclerView;
     EditText answer;
     TextView question;
     ProgressDialog progressDialog;
+
     Questionnaire questionnaire;
     QuestionAdapter mAdapter;
 
@@ -55,6 +56,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         downloadQuestions();
 
+        mAdapter = new QuestionAdapter(questionses);
         findViewById(R.id.nextQuestion_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,8 +66,11 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void answer() {
-        answerses.add(new Answers(String.valueOf(answer.getText()), question.getId()));
-        nextQuestion();
+        if(!answer.getText().toString().equals(""))
+        {
+            answerses.add(new Answers(String.valueOf(answer.getText()), question.getId()));
+            nextQuestion();
+        }
     }
 
     public void nextQuestion()
@@ -93,14 +98,15 @@ public class QuestionActivity extends AppCompatActivity {
 
         ApiServices service = retrofit.create(ApiServices.class);
 
-        service.getQuestion(questionses.get(0).getQuestionId()).enqueue(new Callback<ResponseBody>() {
+        //service.getQuestion(questionnaire.getQuestionnaireId()).enqueue(new Callback<ResponseBody>() {
+        service.getQuestion(1).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 if (response!=null && response.body() != null){
                     try {
                         JSONArray array = new JSONArray(response.body().string());
-                        for (int i = 0; i < array.length(); i++) {
+                        for (int i = 0; i <= array.length(); i++) {
                             questionses.add(new Questions(array.getJSONObject(i)));
                         }
                     } catch (IOException | JSONException e) {
@@ -115,6 +121,7 @@ public class QuestionActivity extends AppCompatActivity {
                 }else{
                     System.out.println("null");
                 }
+                question.setText((CharSequence) questionses.remove(0).getQuestionBody());
             }
 
             @Override

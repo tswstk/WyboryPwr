@@ -13,37 +13,10 @@ import org.json.JSONObject;
 public class Questions implements Parcelable {
 
     int questionId;
+    int questionnaireId;
     String questionBody;
     Questionnaire questionnaire;
 
-
-/*
-    [{
-        "$id":"1","Ankieta":
-        {
-            "$id":"2","Ankieter":
-            {
-                "$id":"3","IdAnkietera":1,"IdPracownika":8,"Ankietas":
-                [{
-                "$ref":"2"
-                }],
-                "Pracownik":null
-            },
-            "Pytanias":
-            [{"$ref":"1"
-            }],
-            "IdAnkiety":1,"DataZakonczenia":"2017-01-25T00:00:00","IdAnkietera":1
-        },
-        "Odpowiedzs":
-        [{
-        "$id":"4","IdOpowiedzi":1,"IdWyborcy":4,"IdPytania":1,"Odpowiedz1":"Bardzo dobrze","Pytania":
-            {
-                "$ref":"1"
-            },"Wyborca":null
-        }],
-        "IdPytania":1,"IdAnkiety":1,"TrescPytania":"Jak ocenia Pan/Pani aplikacje do przeprowadzania wyborów?"
-    }]
-*/
 
     public Questions(JSONObject jsonString) {
         try {
@@ -51,6 +24,7 @@ public class Questions implements Parcelable {
             this.questionBody = jsonString.getString("TrescPytania");
             this.questionId = jsonString.getInt("IdPytania");
             JSONObject questionnaireObject = jsonString.getJSONObject("Ankieta");
+            this.questionnaireId = jsonString.getInt("IdAnkiety");
 
             this.questionnaire = new Questionnaire(questionnaireObject);
 
