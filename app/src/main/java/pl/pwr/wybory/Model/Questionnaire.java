@@ -24,6 +24,7 @@ public class Questionnaire implements Parcelable {
 
     public Questionnaire(JSONObject jsonString) {
         try {
+            this.questionnaireId = jsonString.getInt("IdAnkiety");
             this.dateString = jsonString.getString("DataZakonczenia");
             dateString = dateString.substring(0, 10);
 
@@ -39,6 +40,7 @@ public class Questionnaire implements Parcelable {
     }
 
     protected Questionnaire(Parcel in) {
+        questionnaireId = in.readInt();
         dateString = in.readString();
         questionnaireWorker = in.readParcelable(QuestionnaireWorker.class.getClassLoader());
     }

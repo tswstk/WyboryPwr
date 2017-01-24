@@ -28,4 +28,7 @@ public interface ApiServices {
 
     @GET("Ankieta")
     Call<ResponseBody> getAllQuestionnaires();
+
+    @GET("api/Pytaniaankiety/{id}")
+    Call<ResponseBody> getQuestion(@Path("id") int id);
 }
