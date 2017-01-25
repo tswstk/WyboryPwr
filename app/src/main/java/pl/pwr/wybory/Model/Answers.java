@@ -23,9 +23,8 @@ public class Answers {
         return questionId;
     }
 
-    public Answers(String answer, int questionId) {
+    public Answers(String answer) {
 
         this.answer = answer;
-        this.questionId = questionId;
     }
 }

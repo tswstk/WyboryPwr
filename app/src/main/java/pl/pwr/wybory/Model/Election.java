@@ -49,7 +49,6 @@ public class Election implements Parcelable {
         return position.getFaculty();
     }
 
-    //{"$id":"1","IdWyborów":1,"IdStanowiska":1,"IdKoordynatora":1,"DataWyborów":"2017-02-01T00:00:00","Głos":[],"Koordynator":null,"Stanowisko":null}
     public Election(JSONObject jsonString){
         try {
             this.electionId = jsonString.getInt("idWyborow");

@@ -67,11 +67,9 @@ public class ElectionsActivity extends AppCompatActivity implements OnElectionsI
             @Override
             public void onClick(View v) {
 
-//                AddElectionsDialog dialog = new AddElectionsDialog();
-//                dialog.show(getSupportFragmentManager(), "add_elections_dialog");
+                AddElectionsDialog dialog = new AddElectionsDialog();
+                dialog.show(getSupportFragmentManager(), "add_elections_dialog");
 
-                Intent intent = new Intent(ElectionsActivity.this, QuestionnaireActivity.class);
-                startActivity(intent);
             }
         });
     }

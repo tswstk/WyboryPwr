@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,8 +37,15 @@ public class QuestionActivity extends AppCompatActivity {
     QuestionAdapter mAdapter;
 
     ArrayList<Questions> questionses;
-    ArrayList<Integer> questionsesId;
+
+    //ArrayList<Integer> questionsesId;
+    int [] questionsesId;
+    int iter = 0;
+
     ArrayList<Answers> answerses;
+    //ArrayList<String> answerses;
+    JSONArray jsonArray = new JSONArray();
+    JSONArray jsonQuestionId = new JSONArray();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -45,8 +53,11 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question);
 
         questionses = new ArrayList<Questions>();
+
         answerses = new ArrayList<Answers>();
-        questionsesId = new ArrayList<Integer>();
+        //answerses = new ArrayList<String>();
+
+        //questionsesId = new ArrayList<Integer>();
 
         this.questionnaireId = getIntent().getExtras().getInt(Const.QUESTIONNAIRE_BUNDLE);
 
@@ -60,23 +71,35 @@ public class QuestionActivity extends AppCompatActivity {
         findViewById(R.id.nextQuestion_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                answer();
+                try {
+                    answer();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    private void answer() {
+    private void answer() throws JSONException {
         if(!answer.getText().toString().equals(""))
         {
-            answerses.add(new Answers(String.valueOf(answer.getText()), question.getId()));
+            answerses.add(new Answers(String.valueOf(answer.getText())));
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("Answer", answerses.get(answerses.size()-1).getAnswer());
+            jsonArray.put(jsonObject);
+            //answerses.add(new String(String.valueOf(answer.getText())));
             nextQuestion();
         }
     }
 
-    public void nextQuestion()
-    {
+
+
+    public void nextQuestion() throws JSONException {
         if(questionses.size() > 0)
         {
+            questionsesId[iter++] = questionses.get(0).getQuestionId();
+            jsonQuestionId.put(questionses.get(0).getQuestionId());
             question.setText((CharSequence) questionses.remove(0).getQuestionBody());
             answer.setText("");
         }
@@ -107,7 +130,7 @@ public class QuestionActivity extends AppCompatActivity {
                         JSONArray array = new JSONArray(response.body().string());
                         for (int i = 0; i < array.length(); i++) {
                             questionses.add(new Questions(array.getJSONObject(i)));
-                            questionsesId.add(questionses.get(i).getQuestionId());
+                            //questionsesId.add(questionses.get(i).getQuestionId());
                         }
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
@@ -121,6 +144,9 @@ public class QuestionActivity extends AppCompatActivity {
                 }else{
                     System.out.println("null");
                 }
+                questionsesId = new int [questionses.size()];
+                questionsesId[iter++] = questionses.get(0).getQuestionId();
+                jsonQuestionId.put(questionses.get(0).getQuestionId());
                 question.setText((CharSequence) questionses.remove(0).getQuestionBody());
             }
 
@@ -131,14 +157,13 @@ public class QuestionActivity extends AppCompatActivity {
         });
     }
 
-    public void sendAnswers()
-    {
+    public void sendAnswers() throws JSONException {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Const.BASE_URL)
                 .build();
 
         ApiServices services = retrofit.create(ApiServices.class);
-        services.sendAnswers(answerses, Access.user.getElector_id(), questionsesId).enqueue(new Callback<ResponseBody>() {
+        services.sendAnswers(jsonArray, Access.user.getElector_id(), jsonQuestionId).enqueue(new Callback<ResponseBody>() {
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

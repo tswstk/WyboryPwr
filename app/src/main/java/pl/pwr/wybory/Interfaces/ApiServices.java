@@ -1,6 +1,9 @@
 package pl.pwr.wybory.Interfaces;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 import okhttp3.ResponseBody;
 import pl.pwr.wybory.Model.Answers;
@@ -9,6 +12,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+
 
 /**
  * Created by Tomek on 21.01.2017.
@@ -46,6 +50,9 @@ public interface ApiServices {
     Call<ResponseBody> vote(@Path("idK") int idK, @Path("idW") int idW);
 
     @POST("OdbiorAnkiety/{listaOdpowiedzi}/{idWyborcy}/{listaPytan}")
-    Call<ResponseBody> sendAnswers(@Path("listaOdpowiedzi") ArrayList<Answers> listaOdpowiedzi, @Path("idWyborcy") int idWyborcy, @Path("listaPytan") ArrayList<Integer> listaPytan);
+    Call<ResponseBody> sendAnswers(@Path("listaOdpowiedzi") JSONArray listaOdpowiedzi, @Path("idWyborcy") int idWyborcy, @Path("listaPytan") JSONArray listaPytan);
+
+    @POST("DodawanieWyborow/{idKoor}/{dataWyborow}/{idStan}")
+    Call<ResponseBody> sendElection(@Path("idKoor") int idKoor,  @Path("dataWyborow") String dataWyborow, @Path("idStan") int idStan);
 
 }
