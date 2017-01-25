@@ -111,7 +111,8 @@ public class QuestionnaireActivity extends AppCompatActivity implements OnQuesti
     public void onQuestionnaireInteracionListener(Questionnaire questionnaire) {
         Intent intent = new Intent(this, QuestionActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelable(Const.QUESTIONNAIRE_BUNDLE, questionnaire);
+        //bundle.putParcelable(Const.QUESTIONNAIRE_BUNDLE, questionnaire);
+        bundle.putInt(Const.QUESTIONNAIRE_BUNDLE, questionnaire.getQuestionnaireId());
         intent.putExtras(bundle);
         startActivity(intent);
     }

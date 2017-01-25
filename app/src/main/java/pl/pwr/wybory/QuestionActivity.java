@@ -3,25 +3,23 @@ package pl.pwr.wybory;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import okhttp3.ResponseBody;
 import pl.pwr.wybory.Adapters.QuestionAdapter;
+import pl.pwr.wybory.Interfaces.Access;
 import pl.pwr.wybory.Interfaces.ApiServices;
 import pl.pwr.wybory.Interfaces.Const;
 import pl.pwr.wybory.Model.Answers;
-import pl.pwr.wybory.Model.Questionnaire;
 import pl.pwr.wybory.Model.Questions;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,10 +32,11 @@ public class QuestionActivity extends AppCompatActivity {
     TextView question;
     ProgressDialog progressDialog;
 
-    Questionnaire questionnaire;
+    int questionnaireId;
     QuestionAdapter mAdapter;
 
     ArrayList<Questions> questionses;
+    ArrayList<Integer> questionsesId;
     ArrayList<Answers> answerses;
 
     @Override
@@ -47,8 +46,9 @@ public class QuestionActivity extends AppCompatActivity {
 
         questionses = new ArrayList<Questions>();
         answerses = new ArrayList<Answers>();
+        questionsesId = new ArrayList<Integer>();
 
-        this.questionnaire = getIntent().getExtras().getParcelable(Const.QUESTIONNAIRE_BUNDLE);
+        this.questionnaireId = getIntent().getExtras().getInt(Const.QUESTIONNAIRE_BUNDLE);
 
         answer = (EditText) findViewById(R.id.answer_eidtText);
         question = (TextView) findViewById(R.id.question_textView);
@@ -98,16 +98,16 @@ public class QuestionActivity extends AppCompatActivity {
 
         ApiServices service = retrofit.create(ApiServices.class);
 
-        //service.getQuestion(questionnaire.getQuestionnaireId()).enqueue(new Callback<ResponseBody>() {
-        service.getQuestion(1).enqueue(new Callback<ResponseBody>() {
+        service.getQuestion(questionnaireId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 if (response!=null && response.body() != null){
                     try {
                         JSONArray array = new JSONArray(response.body().string());
-                        for (int i = 0; i <= array.length(); i++) {
+                        for (int i = 0; i < array.length(); i++) {
                             questionses.add(new Questions(array.getJSONObject(i)));
+                            questionsesId.add(questionses.get(i).getQuestionId());
                         }
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
@@ -133,8 +133,29 @@ public class QuestionActivity extends AppCompatActivity {
 
     public void sendAnswers()
     {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Const.BASE_URL)
+                .build();
 
+        ApiServices services = retrofit.create(ApiServices.class);
+        services.sendAnswers(answerses, Access.user.getElector_id(), questionsesId).enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.body()!=null) {
+                    Toast.makeText(QuestionActivity.this, "Wysłano odpowiedzi", Toast.LENGTH_SHORT).show();
+                    QuestionActivity.this.finish();
+                }else{
+                    Toast.makeText(QuestionActivity.this, "Błąd podczas wysyłania", Toast.LENGTH_SHORT).show();
+                    QuestionActivity.this.finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(QuestionActivity.this, "Nie można uzyskać połączenia", Toast.LENGTH_SHORT).show();
+                QuestionActivity.this.finish();
+            }
+        });
     }
-
-
 }

@@ -10,8 +10,10 @@ import java.text.ParseException;
  */
 
 public class Answers {
+
     String answer;
     int questionId;
+    int electorId;
 
     public String getAnswer() {
         return answer;

@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
                 String login = String.valueOf(((EditText)findViewById(R.id.login_editText)).getText());
                 String password = String.valueOf(((EditText)findViewById(R.id.login_editText)).getText());
 
-               logon(login, password);
+                logon(login, password);
 //                goToMenuActivity(null);
             }
         });

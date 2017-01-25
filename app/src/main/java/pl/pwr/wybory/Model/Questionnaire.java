@@ -62,6 +62,10 @@ public class Questionnaire implements Parcelable {
         return 0;
     }
 
+    public QuestionnaireWorker getQuestionnaireWorker() {
+        return questionnaireWorker;
+    }
+
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(dateString);
