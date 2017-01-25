@@ -7,8 +7,7 @@
         android:text="Dodawanie nowych wyborów"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:padding="10px"/>
+        android:id="@+id/textView"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -16,7 +15,7 @@
         android:inputType="textPersonName"
         android:hint="Nazwa Stanowiska"
         android:ems="10"
-        android:id="@+id/position_editText" />
+        android:id="@+id/position_editText"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -24,11 +23,11 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/date_editText"
-        android:hint="Data Wyborów" />
+        android:hint="Data Wyborów"/>
 
     <Button
         android:text="Wyślij"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/send_button" />
+        android:id="@+id/send_button"/>
 </LinearLayout>
