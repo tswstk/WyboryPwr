@@ -85,7 +85,7 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
 
         ApiServices service = retrofit.create(ApiServices.class);
 
-        service.getCandidates(election.getElectionId()).enqueue(new Callback<ResponseBody>() {
+        service.getElectionCandidates(election.getElectionId()).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -139,7 +139,7 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
         services.deleteCandidate(candidateId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override

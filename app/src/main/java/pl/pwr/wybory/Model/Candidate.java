@@ -70,6 +70,10 @@ public class Candidate extends Worker {
         return position;
     }
 
+    public int getCandidate_id() {
+        return candidate_id;
+    }
+
     @Override
     public int describeContents() {
         return super.describeContents();

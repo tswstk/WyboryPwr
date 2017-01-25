@@ -15,4 +15,7 @@
     <string name="edit">Edytuj</string>
     <string name="vote">Głosuj</string>
     <string name="delete">Usuń</string>
+    <string name="employed">Zatrudniony:</string>
+    <string name="candidat_on_position">Kandydat na stanowisko</string>
+    <string name="election_program">Program wyborczy</string>
 </resources>

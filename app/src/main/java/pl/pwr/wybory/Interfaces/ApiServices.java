@@ -21,9 +21,14 @@ public interface ApiServices {
 
     @GET("ElectionKandidate/{id}")
     Call<ResponseBody> getCandidates(@Path("id") int id);
+    @GET("KandydatWyborow/{id}")
+    Call<ResponseBody> getElectionCandidates(@Path("id") int id);
 
     @DELETE("Kandydat/{id}")
     Call<ResponseBody> deleteCandidate(@Path("id") int id);
+
+    @POST("EdytujProgram/{id}/{program}")
+    Call<ResponseBody> editProgram(@Path("id") int id, @Path("program") String program);
 
     @GET("KandydatIdW/{id}")
     Call<ResponseBody> getCandidate(@Path("id") int id);

@@ -4,13 +4,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import pl.pwr.wybory.Interfaces.Access;
 import pl.pwr.wybory.Interfaces.OnCandidateInteractionListener;
 import pl.pwr.wybory.Model.Candidate;
 import pl.pwr.wybory.R;
+import retrofit2.Retrofit;
 
 /**
  * Created by Tomek on 21.01.2017.
@@ -48,6 +51,9 @@ public class CandidatesAdapter extends android.support.v7.widget.RecyclerView.Ad
                 }
             }
         });
+        if (!Access.isCoordinator()){
+            holder.mDeleteButton.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -60,12 +66,14 @@ public class CandidatesAdapter extends android.support.v7.widget.RecyclerView.Ad
         public final View mView;
         public final TextView mNameView;
         public Candidate mItem;
+        public Button mDeleteButton;
 
         public ViewHolder(View view) {
             super(view);
 
             mView = view;
             mNameView = (TextView) view.findViewById(R.id.name_textView);
+            mDeleteButton = (Button) view.findViewById(R.id.delete_button);
         }
     }
 }

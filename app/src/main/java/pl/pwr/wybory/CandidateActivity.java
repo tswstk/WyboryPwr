@@ -100,19 +100,31 @@ public class CandidateActivity extends AppCompatActivity {
     private void openEditingDialog() {
         final EditText txtUrl = new EditText(this);
 
-// Set the default text to a link of the Queen
-        txtUrl.setHint("http://www.librarising.com/astrology/celebs/images2/QR/queenelizabethii.jpg");
-
         new AlertDialog.Builder(this)
-                .setTitle("Moustachify Link")
-                .setMessage("Paste in the link of an image to moustachify!")
+                .setTitle("Edycja")
                 .setView(txtUrl)
-                .setPositiveButton("Moustachify", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Zapisz", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        String url = txtUrl.getText().toString();
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(Const.BASE_URL)
+                                .build();
+
+                        ApiServices services = retrofit.create(ApiServices.class);
+
+                        services.editProgram(candidate.getElector_id(), String.valueOf(txtUrl.getText())).enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                            }
+                        });
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                     }
                 })
