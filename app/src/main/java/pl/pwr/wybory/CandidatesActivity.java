@@ -11,6 +11,7 @@ import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -25,6 +26,7 @@ import pl.pwr.wybory.Interfaces.Const;
 import pl.pwr.wybory.Interfaces.OnCandidateInteractionListener;
 import pl.pwr.wybory.Model.Candidate;
 import pl.pwr.wybory.Model.Election;
+import pl.pwr.wybory.Model.Worker;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -93,7 +95,9 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
                     try {
                         JSONArray array = new JSONArray(response.body().string());
                         for (int i = 0; i < array.length(); i++) {
-                            mValues.add(new Candidate(array.getJSONObject(i)));
+                            JSONObject jsonObject = array.getJSONObject(i);
+                            mValues.add(new Candidate(jsonObject, jsonObject.getString("first_name"), jsonObject.getString("last_name"),jsonObject.getLong("pesel"),
+                                    jsonObject.getString("employmentDate"),jsonObject.getString("program")));
                         }
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <TextView
         android:text="Dodawanie nowych wyborów"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"/>
+        android:id="@+id/textView"
+        android:textSize="24sp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -15,7 +17,8 @@
         android:inputType="textPersonName"
         android:hint="Nazwa Stanowiska"
         android:ems="10"
-        android:id="@+id/position_editText"/>
+        android:id="@+id/position_editText"
+        android:layout_marginTop="32dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -23,11 +26,15 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/date_editText"
-        android:hint="Data Wyborów"/>
+        android:hint="Data Wyborów"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:text="Wyślij"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/send_button"/>
+        android:id="@+id/send_button"
+        android:textColor="@color/cardview_light_background"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_marginTop="16dp" />
 </LinearLayout>

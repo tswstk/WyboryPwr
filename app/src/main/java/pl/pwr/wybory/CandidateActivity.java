@@ -144,7 +144,7 @@ public class CandidateActivity extends AppCompatActivity {
                 .baseUrl(Const.BASE_URL)
                 .build();
         ApiServices services = retrofit.create(ApiServices.class);
-                services.vote(candidate.getElector_id(), Access.user.getElector_id()).enqueue(new Callback<ResponseBody>() {
+                services.vote(candidate.getCandidate_id(), Access.user.getElector_id()).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if(response.body()!=null) {

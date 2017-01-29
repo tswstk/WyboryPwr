@@ -24,8 +24,8 @@ public class Candidate extends Worker {
         this.program = program;
     }
 
-    public Candidate(JSONObject jsonString) throws JSONException, ParseException {
-        super(jsonString.getJSONObject("Pracownik"));
+    public Candidate(JSONObject jsonString, String first_name, String last_name, long pesel, String employmentDate, String program) throws JSONException, ParseException {
+        super(first_name, last_name, pesel, employmentDate);
 
         try {
             JSONObject positionObject = jsonString.getJSONObject("Stanowisko");
