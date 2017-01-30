@@ -11,13 +11,11 @@
         android:id="@+id/textView"
         android:textSize="24sp" />
 
-    <EditText
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Nazwa Stanowiska"
-        android:ems="10"
-        android:id="@+id/position_editText"
+        android:id="@+id/spinner"
+
         android:layout_marginTop="32dp" />
 
     <EditText
@@ -37,4 +35,5 @@
         android:textColor="@color/cardview_light_background"
         android:backgroundTint="@color/colorAccent"
         android:layout_marginTop="16dp" />
+
 </LinearLayout>

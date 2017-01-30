@@ -7,8 +7,11 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -16,7 +19,9 @@ import org.json.JSONException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import pl.pwr.wybory.ElectionsActivity;
@@ -35,21 +40,14 @@ import retrofit2.Retrofit;
  * Created by Tomek on 22.01.2017.
  */
 
-public class AddElectionsDialog extends DialogFragment {
+public class AddElectionsDialog extends DialogFragment implements AdapterView.OnItemSelectedListener {
 
     int positionId;
-    String positionName;
     String dateOfELection;
     Date date;
 
-    EditText positionEdit;
     EditText dateEdit;
-
-    static String [] tabOfPositions = new String[] {
-            "Prodziekan",
-            "Dziekan",
-            "Sekretarz"
-    };
+    Spinner spinner;
 
     @NonNull
     @Override
@@ -60,16 +58,20 @@ public class AddElectionsDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.layout_add_elections, null);
         builder.setView(view);
 
-        positionEdit = (EditText) view.findViewById(R.id.position_editText);
         dateEdit = (EditText) view.findViewById(R.id.date_editText);
 
-        positionName = String.valueOf(positionEdit.getText());
+        spinner = (Spinner) view.findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> dataAdapter = ArrayAdapter.createFromResource(getActivity(),  R.array.positions, android.R.layout.simple_spinner_item);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+
 
         view.findViewById(R.id.send_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    positionName = String.valueOf(positionEdit.getText());
                     dateOfELection = String.valueOf(dateEdit.getText());
                     sendData();
                 } catch (ParseException e) {
@@ -82,11 +84,6 @@ public class AddElectionsDialog extends DialogFragment {
     }
 
     public void sendData() throws ParseException {
-        for(int i = 0; i < tabOfPositions.length;i++)
-        {
-            if(tabOfPositions[i].equals(positionName))
-                positionId = i;
-        }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Const.BASE_URL)
                 .build();
@@ -96,15 +93,15 @@ public class AddElectionsDialog extends DialogFragment {
         Date date = format.parse(string);
 
         ApiServices services = retrofit.create(ApiServices.class);
-        services.sendElection(1, dateOfELection, positionId).enqueue(new Callback<ResponseBody>() {
+        services.sendElection(1, dateOfELection, spinner.getSelectedItemPosition()).enqueue(new Callback<ResponseBody>() {
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.body()!=null) {
+                    Toast.makeText(getActivity(), "Zarejestrowano Wybory", Toast.LENGTH_SHORT).show();
                     dismiss();
-
                 }else{
-
+                    Toast.makeText(getActivity(), "Błąd", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -116,4 +113,13 @@ public class AddElectionsDialog extends DialogFragment {
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

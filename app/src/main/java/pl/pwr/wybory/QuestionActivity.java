@@ -42,8 +42,8 @@ public class QuestionActivity extends AppCompatActivity {
     int [] questionsesId;
     int iter = 0;
 
-    ArrayList<Answers> answerses;
-    //ArrayList<String> answerses;
+    ArrayList<String> answerses;
+    String [] answersesTab;
     JSONArray jsonArray = new JSONArray();
     JSONArray jsonQuestionId = new JSONArray();
 
@@ -54,8 +54,8 @@ public class QuestionActivity extends AppCompatActivity {
 
         questionses = new ArrayList<Questions>();
 
-        answerses = new ArrayList<Answers>();
-        //answerses = new ArrayList<String>();
+        //answerses = new ArrayList<Answers>();
+        answerses = new ArrayList<String>();
 
         //questionsesId = new ArrayList<Integer>();
 
@@ -83,13 +83,18 @@ public class QuestionActivity extends AppCompatActivity {
     private void answer() throws JSONException {
         if(!answer.getText().toString().equals(""))
         {
-            answerses.add(new Answers(String.valueOf(answer.getText())));
+            answerses.add(new String(String.valueOf(answer.getText())));
+            //answersesTab[iter] = (String.valueOf(answer.getText()));
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("Answer", answerses.get(answerses.size()-1).getAnswer());
+            jsonObject.put("Answer", answerses.get(answerses.size()-1));
             jsonArray.put(jsonObject);
             //answerses.add(new String(String.valueOf(answer.getText())));
             nextQuestion();
+        }
+        else
+        {
+            Toast.makeText(QuestionActivity.this, "Wypełnij wszystkie pola!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -145,6 +150,7 @@ public class QuestionActivity extends AppCompatActivity {
                     System.out.println("null");
                 }
                 questionsesId = new int [questionses.size()];
+                answersesTab = new String [questionses.size()];
                 questionsesId[iter++] = questionses.get(0).getQuestionId();
                 jsonQuestionId.put(questionses.get(0).getQuestionId());
                 question.setText((CharSequence) questionses.remove(0).getQuestionBody());
@@ -163,24 +169,31 @@ public class QuestionActivity extends AppCompatActivity {
                 .build();
 
         ApiServices services = retrofit.create(ApiServices.class);
-        services.sendAnswers(jsonArray, Access.user.getElector_id(), jsonQuestionId).enqueue(new Callback<ResponseBody>() {
+        //int i = 0;
+        //for(String ans : answerses)
+        for(int i = 0; i < answerses.size(); i++)
+        {
+            services.sendAnswers(answerses.get(i), Access.user.getElector_id(), questionsesId[i]).enqueue(new Callback<ResponseBody>() {
 
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.body()!=null) {
-                    Toast.makeText(QuestionActivity.this, "Wysłano odpowiedzi", Toast.LENGTH_SHORT).show();
-                    QuestionActivity.this.finish();
-                }else{
-                    Toast.makeText(QuestionActivity.this, "Błąd podczas wysyłania", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if(response.body()!=null) {
+                        Toast.makeText(QuestionActivity.this, "Wysłano odpowiedzi", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuestionActivity.this, "Dziękujemy za wypełnienie ankiety.", Toast.LENGTH_SHORT).show();
+                        QuestionActivity.this.finish();
+                    }else{
+                        Toast.makeText(QuestionActivity.this, "Błąd podczas wysyłania", Toast.LENGTH_SHORT).show();
+                        QuestionActivity.this.finish();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(QuestionActivity.this, "Nie można uzyskać połączenia", Toast.LENGTH_SHORT).show();
                     QuestionActivity.this.finish();
                 }
-            }
+            });
+        }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(QuestionActivity.this, "Nie można uzyskać połączenia", Toast.LENGTH_SHORT).show();
-                QuestionActivity.this.finish();
-            }
-        });
     }
 }

@@ -50,7 +50,7 @@ public interface ApiServices {
     Call<ResponseBody> vote(@Path("idK") int idK, @Path("idW") int idW);
 
     @POST("OdbiorAnkiety/{listaOdpowiedzi}/{idWyborcy}/{listaPytan}")
-    Call<ResponseBody> sendAnswers(@Path("listaOdpowiedzi") JSONArray listaOdpowiedzi, @Path("idWyborcy") int idWyborcy, @Path("listaPytan") JSONArray listaPytan);
+    Call<ResponseBody> sendAnswers(@Path("listaOdpowiedzi") String listaOdpowiedzi, @Path("idWyborcy") int idWyborcy, @Path("listaPytan") int listaPytan);
 
     @POST("DodawanieWyborow/{idKoor}/{dataWyborow}/{idStan}")
     Call<ResponseBody> sendElection(@Path("idKoor") int idKoor,  @Path("dataWyborow") String dataWyborow, @Path("idStan") int idStan);

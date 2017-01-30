@@ -81,9 +81,9 @@ public class CandidateActivity extends AppCompatActivity {
 
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
                     } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
