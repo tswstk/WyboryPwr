@@ -48,6 +48,11 @@ public class Position implements Parcelable {
         this.nameOfPosition = nameOfPosition;
         this.faculty = faculty;
     }
+ public Position(String nameOfPosition, String faculty) {
+
+        this.nameOfPosition = nameOfPosition;
+        this.faculty = faculty;
+    }
 
     @Override
     public int describeContents() {

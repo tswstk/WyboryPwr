@@ -24,14 +24,13 @@ public class Candidate extends Worker {
         this.program = program;
     }
 
-    public Candidate(JSONObject jsonString, String first_name, String last_name, long pesel, String employmentDate, String program) throws JSONException, ParseException {
-        super(first_name, last_name, pesel, employmentDate);
+    public Candidate(JSONObject jsonString) throws JSONException, ParseException {
+        super(jsonString.getString("imie"), jsonString.getString("lastname"),jsonString.getLong("pesel"), jsonString.getString("dataZatr"));
 
         try {
-            JSONObject positionObject = jsonString.getJSONObject("Stanowisko");
-            this.candidate_id = jsonString.getInt("IdKandydata");
-            this.position = new Position(positionObject.getInt("IdStanowiska"), positionObject.getString("NazwaStanowiska"), positionObject.getString("Wydzial"));
-            this.program = jsonString.getString("Program");
+            this.candidate_id = jsonString.getInt("idKandydata");
+            this.position = new Position(jsonString.getString("stanowisko"), jsonString.getString("wydzial"));
+            this.program = jsonString.getString("program");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -47,7 +46,7 @@ public class Candidate extends Worker {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(program);
-        dest.writeParcelable(position, flags);  
+        dest.writeParcelable(position, flags);
     }
 
     public static final Creator<Candidate> CREATOR = new Creator<Candidate>() {

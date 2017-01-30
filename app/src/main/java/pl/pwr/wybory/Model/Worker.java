@@ -39,7 +39,7 @@ public class Worker extends Elector{
     public Worker(JSONObject jsonString) throws JSONException {
         super(jsonString.getJSONObject("Wyborca"));
         try {
-            String dateString = jsonString.getString("DataZatr");
+            String dateString = jsonString.getString("dataZatr");
 
             this.dateString = dateString.substring(0, 10);
 

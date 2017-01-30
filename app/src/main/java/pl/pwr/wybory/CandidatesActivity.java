@@ -96,8 +96,8 @@ public class CandidatesActivity extends AppCompatActivity implements OnCandidate
                         JSONArray array = new JSONArray(response.body().string());
                         for (int i = 0; i < array.length(); i++) {
                             JSONObject jsonObject = array.getJSONObject(i);
-                            mValues.add(new Candidate(jsonObject, jsonObject.getString("first_name"), jsonObject.getString("last_name"),jsonObject.getLong("pesel"),
-                                    jsonObject.getString("employmentDate"),jsonObject.getString("program")));
+                            mValues.add(new Candidate(jsonObject.getString("imie"), jsonObject.getString("lastname"),jsonObject.getLong("pesel"),
+                                    jsonObject.getString("dataZatr"),jsonObject.getString("program")));
                         }
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
