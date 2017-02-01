@@ -38,20 +38,20 @@ public class ExampleInstrumentedTest {
         assertEquals("pl.pwr.wybory", appContext.getPackageName());
     }
 
-    @Rule
-    public ActivityTestRule<LoginActivity> rule  = new  ActivityTestRule<>(LoginActivity.class);
-
-    @Test
-    public void ensureListViewIsPresent() throws Exception {
-        onView(withId(R.id.login_editText)).perform(typeText(""));
-        onView(withId(R.id.password_editText)).perform(typeText(""));
-        onView(withId(R.id.login_button)).perform(click());
-        onView(withText(startsWith("N"))).
-                inRoot(withDecorView(
-                        not(is(rule.getActivity().
-                                getWindow().getDecorView())))).
-                check(matches(isDisplayed()));
-    }
+//    @Rule
+//    public ActivityTestRule<LoginActivity> rule  = new  ActivityTestRule<>(LoginActivity.class);
+//
+//    @Test
+//    public void ensureListViewIsPresent() throws Exception {
+//        onView(withId(R.id.login_editText)).perform(typeText(""));
+//        onView(withId(R.id.password_editText)).perform(typeText(""));
+//        onView(withId(R.id.login_button)).perform(click());
+//        onView(withText(startsWith("N"))).
+//                inRoot(withDecorView(
+//                        not(is(rule.getActivity().
+//                                getWindow().getDecorView())))).
+//                check(matches(isDisplayed()));
+//    }
 
 
 
