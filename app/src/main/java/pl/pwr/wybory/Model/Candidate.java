@@ -19,13 +19,13 @@ public class Candidate extends Worker {
     Position position;
     int candidate_id;
 
-    public Candidate(String first_name, String last_name, long pesel, String employmentDate, String program) throws ParseException {
-        super(first_name, last_name, pesel, employmentDate);
+    public Candidate(String first_name, String last_name, long pesel, String employmentDate, String program, int electorId) throws ParseException {
+        super(first_name, last_name, pesel, employmentDate, electorId);
         this.program = program;
     }
 
     public Candidate(JSONObject jsonString) throws JSONException, ParseException {
-        super(jsonString.getString("imie"), jsonString.getString("lastname"),jsonString.getLong("pesel"), jsonString.getString("dataZatr"));
+        super(jsonString.getString("imie"), jsonString.getString("lastname"),jsonString.getLong("pesel"), jsonString.getString("dataZatr"), jsonString.getInt("idWyborcy"));
 
         try {
             this.candidate_id = jsonString.getInt("idKandydata");

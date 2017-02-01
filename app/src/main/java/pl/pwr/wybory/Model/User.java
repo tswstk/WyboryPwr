@@ -16,7 +16,7 @@ public class User extends Elector {
     String access;
 
     public User(String first_name, String last_name, long pesel, String login, String password, String access) {
-        super(first_name, last_name, pesel);
+        super(first_name, last_name, pesel, 0);
         this.login = login;
         this.password = password;
         this.access = access;

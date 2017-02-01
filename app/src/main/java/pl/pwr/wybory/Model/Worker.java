@@ -22,8 +22,8 @@ public class Worker extends Elector{
     String dateString;
 
 
-    public Worker(String first_name, String last_name, long pesel, String employmentDate) throws ParseException {
-        super(first_name, last_name, pesel);
+    public Worker(String first_name, String last_name, long pesel, String employmentDate, int electorId) throws ParseException {
+        super(first_name, last_name, pesel, electorId);
         dateString = employmentDate.substring(0, 10);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

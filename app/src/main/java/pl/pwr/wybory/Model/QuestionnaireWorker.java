@@ -16,7 +16,7 @@ public class QuestionnaireWorker extends Worker{
     int questionnaireWorkerId;
 
     public QuestionnaireWorker(String first_name, String last_name, long pesel, String employmentDate, String program) throws ParseException {
-        super(first_name, last_name, pesel, employmentDate);
+        super(first_name, last_name, pesel, employmentDate, 0);
     }
 
     public QuestionnaireWorker(JSONObject jsonString) throws JSONException, ParseException {

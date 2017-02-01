@@ -11,7 +11,7 @@ import java.text.ParseException;
 
 public class Coordinator extends Worker{
     public Coordinator(String first_name, String last_name, long pesel, String employmentDate, String program) throws ParseException {
-        super(first_name, last_name, pesel, employmentDate);
+        super(first_name, last_name, pesel, employmentDate, 1);
     }
 
     public Coordinator(JSONObject jsonString) throws JSONException, ParseException {

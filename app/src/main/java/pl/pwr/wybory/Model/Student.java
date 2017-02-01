@@ -15,7 +15,7 @@ public class Student extends Elector{
     int nrIndeksu;
 
     public Student(String first_name, String last_name, long pesel, int nrIndeksu){
-        super(first_name, last_name, pesel);
+        super(first_name, last_name, pesel, 1);
         this.nrIndeksu = nrIndeksu;
     }
 

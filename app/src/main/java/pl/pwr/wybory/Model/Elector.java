@@ -62,11 +62,12 @@ public class Elector implements Parcelable {
         return pesel;
     }
 
-    public Elector(String first_name, String last_name, long pesel) {
+    public Elector(String first_name, String last_name, long pesel, int elector_id) {
 
         this.first_name = first_name;
         this.last_name = last_name;
         this.pesel = pesel;
+        this.elector_id = elector_id;
     }
 
     @Override
